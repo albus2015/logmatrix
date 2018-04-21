@@ -81,7 +81,7 @@ public class LineLogModel implements java.io.Serializable {
 
     private Tag getNextConst(char[] s, int idx) {
         int end = idx;
-        while (end < s.length && s[end] != '%')
+        while (end < s.length && !isTagFix(s[end]))
             end++;
         Tag tag = new Tag(Tag.TagType.TagConst, new String(s, idx, end - idx));
         return tag;
@@ -89,7 +89,7 @@ public class LineLogModel implements java.io.Serializable {
 
     private Tag getNextTag(Map<String, Tag> tags, char[] s, int idx) {
         int end = idx + 1;
-        if (idx >= s.length || s[idx] != '%')
+        if (idx >= s.length || !isTagFix(s[idx]))
             return null;
         if (s[end] == '{') {
             while (end < s.length && s[end] != '}')end++;
@@ -128,6 +128,8 @@ public class LineLogModel implements java.io.Serializable {
         isTagChar['>'] = 1;
         isTagChar['<'] = 1;
     }
+
+    static boolean isTagFix(char c) {return c == '%' || c == '$';}
 
     /**
      * test

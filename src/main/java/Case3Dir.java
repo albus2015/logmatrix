@@ -39,7 +39,7 @@ public final class Case3Dir {
         lm.init(tags, "$channel $flow $post_flow $visit", " ");
 
         Arrays.asList("".split("\n")).iterator();
-        JavaPairRDD<String, String> data = sc.wholeTextFiles("/Users/linzy/tmp/ng/*.ngFlow");
+        JavaPairRDD<String, String> data = sc.wholeTextFiles("/Users/linzy/tmp/flow/*.ngFlow");
         JavaRDD<LineData> lines = data.flatMap(tuple2 -> {
             List<LineData> ret = new ArrayList<>();
             String[] ar = tuple2._2().split("\n");
